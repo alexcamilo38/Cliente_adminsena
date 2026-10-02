@@ -22,7 +22,7 @@
                             <th>Id</th>
                             <th>Número</th>
                             <th>Marca</th>
-                            <th>Estado</th> <!-- COLUMNA AGREGADA -->
+                            <th>Estado</th>
                             <th>Ambiente</th>
                             <th class="text-center">Acciones</th>
                         </tr>
@@ -30,45 +30,43 @@
 
                     <tbody>
 
-                        @foreach ($computer as $item)
+                        @foreach (($computer ?? []) as $item)
 
                             <tr>
 
                                 <td>{{ $item['id'] }}</td>
 
                                 <td class="fw-semibold">
-                                    {{ $item['number']}}
+                                    {{ $item['number'] }}
                                 </td>
 
-                                <td>{{ $item['brand']}}</td>
+                                <td>{{ $item['brand'] }}</td>
 
                                 <!-- VISUALIZACIÓN DEL ESTADO -->
                                 <td>
-                                    @if(strtolower($item->state) == 'activo')
+                                    @if (strtolower($item['state'] ?? '') == 'activo')
                                         <span class="badge bg-success px-3 py-2">
                                             🟢 Activo
                                         </span>
-                                    @elseif(strtolower($item->state) == 'mantenimiento')
+                                    @elseif (strtolower($item['state'] ?? '') == 'mantenimiento')
                                         <span class="badge bg-warning text-dark px-3 py-2">
                                             🟡 En Mantenimiento
                                         </span>
                                     @else
                                         <span class="badge bg-secondary px-3 py-2">
-                                            {{ ucfirst($item->state ?? 'N/A') }}
+                                            {{ ucfirst($item['state'] ?? 'N/A') }}
                                         </span>
                                     @endif
                                 </td>
 
                                 <td>
-                                    {{ $item->environment?->name ?? ($item->environment_id ? 'Ambiente #' . $item->environment_id : 'Sin asignar') }}
+                                    {{ $item['environment']['name'] ?? (isset($item['environment_id']) ? 'Ambiente #' . $item['environment_id'] : 'Sin asignar') }}
                                 </td>
 
                                 <td class="text-center">
-
-                                    <a href="{{ route('computer.show', $item->id) }}" class="btn btn-info btn-sm text-white me-1">
+                                    <a href="{{ route('computer.show', $item['id']) }}" class="btn btn-info btn-sm text-white me-1">
                                         Mostrar
                                     </a>
-
                                 </td>
 
                             </tr>

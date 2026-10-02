@@ -18,7 +18,7 @@ class TrainingCenterController extends Controller
     public function index()
     {
         $url = env('URL_SERVER_API');$url = env('URL_SERVER_API');
-        $Training_centers = $this->fetchDataFromApi($url . '/trainingcenters/list');
+        $Training_centers = $this->fetchDataFromApi($url . '/trainingcenter/list');
 
         return view('trainingcenters.index', compact('Training_centers'));
     }
@@ -27,7 +27,7 @@ class TrainingCenterController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        $Training_centers = $this->fetchDataFromApi($url . '/trainingcenters/' . $id);
+        $Training_centers = $this->fetchDataFromApi($url . '/trainingcenter/' . $id);
 
         return view('trainingcenters.show', compact('Training_centers'));
     }

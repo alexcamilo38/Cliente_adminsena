@@ -38,6 +38,8 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm border-0 mt-2">
                         <li><a class="dropdown-item py-2" href="{{ route('areas.index') }}">Lista Áreas</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('trainingcenters.index') }}"> Lista Centros</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('computer.index') }}"> Lista Computadores</a></li>
                     </ul>
                 </li>
             </ul>
