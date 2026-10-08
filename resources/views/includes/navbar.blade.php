@@ -30,8 +30,8 @@
                     <a class="nav-link text-white fw-semibold" href="{{ url('/about') }}">Quiénes Somos</a>
                 </li>
 
-                <!-- MENÚ ADMINISTRACIÓN (Controlado por servidor o visible si hay sesión) -->
-                <li class="nav-item dropdown d-none" id="adminDropdownNav">
+                <!-- MENÚ ADMINISTRACIÓN (Siempre visible) -->
+                <li class="nav-item dropdown" id="adminDropdownNav">
                     <a class="btn btn-light dropdown-toggle text-dark fw-medium px-3" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Administración
@@ -40,14 +40,49 @@
                         <li><a class="dropdown-item py-2" href="{{ route('areas.index') }}">Lista Áreas</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('trainingcenters.index') }}"> Lista Centros</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('computer.index') }}"> Lista Computadores</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('teacher.index') }}"> Lista Instructores</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('course.index') }}"> Lista Cursos</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('apprentice.index') }}"> Lista Aprendices</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('programs.index') }}"> Lista Programas</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('environments.index') }}"> Lista Ambientes</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('announcements.index') }}"> Lista Anuncios</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('offers.index') }}"> Lista Ofertas</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('cohorts.index') }}"> Lista Ficha</a></li>
                     </ul>
                 </li>
             </ul>
 
-           
+            <!-- BUSCADOR -->
+            <form action="{{ route('apprentice.index') }}" method="GET" class="d-flex align-items-center my-2 my-lg-0 me-lg-4" role="search">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">🔍</span>
+                    <input class="form-control border-start-0" type="search" name="search" placeholder="Buscar..." aria-label="Buscar" value="{{ request('search') }}">
+                    <button class="btn btn-light text-success fw-bold border" type="submit">Buscar</button>
+                </div>
+            </form>
 
-            <!-- PERFIL / INICIAR SESIÓN (Manejado por JS leyendo localStorage) -->
-            <div id="auth-nav-container"></div>
+            <!-- PERFIL / MENÚ DE USUARIO DIRECTO -->
+            <div id="auth-nav-container">
+                <div class="dropdown ms-lg-2 my-2 my-lg-0">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="rounded-circle bg-white text-success fw-bold d-flex align-items-center justify-content-center shadow-sm me-2" style="width: 38px; height: 38px; border: 2px solid rgba(255,255,255,.8);">
+                            👤
+                        </div>
+                        <span class="fw-bold text-white d-none d-md-inline" id="user-display-name">Administrador</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2" aria-labelledby="profileDropdown" style="border-radius: 12px;">
+                        <li>
+                            <div class="px-3 py-2 border-bottom">
+                                <p class="fw-bold mb-0 text-dark small" id="menu-user-name">Administrador</p>
+                                <small class="text-muted" id="menu-user-email">admin@sena.edu.co</small>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="{{ url('/profile') }}">👤 Mi Perfil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -55,68 +90,17 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        checkAuthStatus();
-    });
-
-    function checkAuthStatus() {
-        const authContainer = document.getElementById('auth-nav-container');
-        const adminDropdown = document.getElementById('adminDropdownNav');
-
+        // Carga los datos del localStorage si existen, o muestra los valores por defecto
         const userSession = JSON.parse(localStorage.getItem('user_session'));
-        const userRole = localStorage.getItem('user_role') || (userSession ? userSession.role : null);
 
         if (userSession) {
-            // Mostrar Administración si es admin
-            if (adminDropdown && (userRole === 'admin' || userRole === 'administrador')) {
-                adminDropdown.classList.remove('d-none');
+            if (userSession.name) {
+                document.getElementById('user-display-name').textContent = userSession.name;
+                document.getElementById('menu-user-name').textContent = userSession.name;
             }
-
-            const name = userSession.name || 'Usuario';
-            const email = userSession.email || '';
-
-            // Mostrar el icono del perfil
-            authContainer.innerHTML = `
-                <div class="dropdown ms-lg-2 my-2 my-lg-0">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="rounded-circle bg-white text-success fw-bold d-flex align-items-center justify-content-center shadow-sm me-2" style="width: 38px; height: 38px; border: 2px solid rgba(255,255,255,.8);">
-                            👤
-                        </div>
-                        <span class="fw-bold text-white d-none d-md-inline">${name}</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2" aria-labelledby="profileDropdown" style="border-radius: 12px;">
-                        <li>
-                            <div class="px-3 py-2 border-bottom">
-                                <p class="fw-bold mb-0 text-dark small">${name}</p>
-                                <small class="text-muted">${email}</small>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item py-2" href="{{ url('/profile') }}">👤 Mi Perfil</a>
-                        </li>
-                        <li>
-                            <button onclick="logout()" class="dropdown-item text-danger fw-bold py-2 w-100 text-start">
-                                <i class="bi bi-box-arrow-right me-2"></i> Cerrar Sesión
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            `;
-        } else {
-            if (adminDropdown) adminDropdown.classList.add('d-none');
-
-            authContainer.innerHTML = `
-                <a href="{{ url('/login') }}" class="btn btn-light text-success fw-bold px-3 rounded-3 shadow-sm d-flex align-items-center gap-1">
-                    <i class="bi bi-person-circle"></i> Iniciar Sesión
-                </a>
-            `;
+            if (userSession.email) {
+                document.getElementById('menu-user-email').textContent = userSession.email;
+            }
         }
-    }
-
-    function logout() {
-        localStorage.removeItem('user_session');
-        localStorage.removeItem('user_role');
-        localStorage.removeItem('isLoggedIn');
-        checkAuthStatus();
-        window.location.href = "{{ url('/login') }}";
-    }
+    });
 </script>
