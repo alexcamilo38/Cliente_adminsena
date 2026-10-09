@@ -31,4 +31,41 @@ class TrainingCenterController extends Controller
 
         return view('trainingcenters.show', compact('Training_centers'));
     }
+
+    public function registro()
+    {
+        return view('trainingcenters.registrar');
+    }
+
+    public function dato(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/trainingcenter/dato', $request->all());
+
+        return redirect()->route('trainingcenters.index');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+        $Training_centers = $this->fetchDataFromApi($url . '/trainingcenter/' . $id);
+        return view('trainingcenters.edit', compact('Training_centers'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::put($url . '/trainingcenter/' . $id, $request->all());
+
+        return redirect()->route('trainingcenters.index');
+    }
+
+      public function destroy($id)
+    {
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/trainingcenter/' . $id);
+        return redirect()->route('trainingcenters.index');
+    }
 }

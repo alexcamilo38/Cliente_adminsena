@@ -28,11 +28,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('areas/create', [AreaController::class, 'create'])->name('areas.create');
 Route::get('areas/list', [AreaController::class, 'index'])->name('areas.index');
+Route::post('areas/store', [AreaController::class, 'salida'])->name('areas.store');
 Route::get('areas/{id}', [AreaController::class, 'show'])->name('areas.show');
+Route::put('areas/{areas}', [AreaController::class, 'update'])->name('areas.update');
+Route::get('areas/{areas}/editar', [AreaController::class, 'edit'])->name('areas.edit');
+Route::delete('areas/{areas}', [AreaController::class, 'destroy'])->name('areas.destroy');
 
+
+Route::get('trainingcenter/registrar', [TrainingCenterController::class, 'registro'])->name('trainingcenters.registrar');
 Route::get('trainingcenter/list', [TrainingCenterController::class, 'index'])->name('trainingcenters.index');
+Route::post('trainingcenter/dato', [TrainingCenterController::class, 'dato'])->name('trainingcenters.datos');
 Route::get('trainingcenter/{id}', [TrainingCenterController::class, 'show'])->name('trainingcenters.show');
+Route::put('trainingcenter/{Training_centers}', [TrainingCenterController::class, 'update'])->name('trainingcenters.update');
+Route::get('trainingcenter/{Training_centers}/editar', [TrainingCenterController::class, 'edit'])->name('trainingcenters.edit');
+Route::delete('trainingcenter/{Training_centers}', [TrainingCenterController::class, 'destroy'])->name('trainingcenters.destroy');
 
 Route::get('computer/list', [ComputerController::class, 'index'])->name('computer.index');
 Route::get('computer/{id}', [ComputerController::class, 'show'])->name('computer.show');

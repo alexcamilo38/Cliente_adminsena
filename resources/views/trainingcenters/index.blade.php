@@ -5,6 +5,10 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="fw-bold text-dark">Lista de Centros</h1>
+
+            <a href="{{ route('trainingcenters.registrar') }}" class="btn btn-success shadow-sm">
+                <i class="bi bi-plus-circle"></i> Nuevo Centro
+            </a>
         </div>
 
         <div class="card shadow-lg border-0 rounded-4">
@@ -45,6 +49,21 @@
                                     <a href="{{ route('trainingcenters.show', $Training_center['id']) }}" class="btn btn-info btn-sm me-1">
                                         Mostrar
                                     </a>
+
+                                    <a href="{{ route('trainingcenters.edit', $Training_center['id']) }}" class="btn btn-warning btn-sm me-1">
+                                        Editar
+                                    </a>
+
+                                    <form action="{{ route('trainingcenters.destroy', $Training_center['id']) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            Eliminar
+                                        </button>
+
+                                    </form>
+
                                 </td>
 
                             </tr>
