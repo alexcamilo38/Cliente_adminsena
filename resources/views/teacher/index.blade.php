@@ -6,6 +6,9 @@
         <div class="d-flex justify-content-between align-items-center mb-4"> 
             <h1 class="fw-bold text-dark">Lista de Profesores</h1> 
 
+             <a href="{{ route('teacher.registro') }}" class="btn btn-success shadow-sm"> 
+                <i class="bi bi-plus-circle"></i> Nuevo Profesor 
+            </a> 
         </div> 
 
         <div class="card shadow-lg border-0 rounded-4"> 
@@ -52,6 +55,20 @@
                                     <a href="{{ route('teacher.show', $teacher['id']) }}" class="btn btn-info btn-sm me-1"> 
                                         Mostrar 
                                     </a> 
+
+                                    <a href="{{ route('teacher.edit', $teacher['id']) }}" class="btn btn-warning btn-sm me-1"> 
+                                        Editar 
+                                    </a> 
+ 
+                                    <form action="{{ route('teacher.destroy', $teacher['id']) }}" method="POST" class="d-inline"> 
+                                        @csrf 
+                                        @method('delete') 
+ 
+                                        <button type="submit" class="btn btn-danger btn-sm"> 
+                                            Eliminar 
+                                        </button> 
+ 
+                                    </form> 
 
                                 </td> 
 

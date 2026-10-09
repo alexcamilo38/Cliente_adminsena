@@ -45,11 +45,21 @@ Route::put('trainingcenter/{Training_centers}', [TrainingCenterController::class
 Route::get('trainingcenter/{Training_centers}/editar', [TrainingCenterController::class, 'edit'])->name('trainingcenters.edit');
 Route::delete('trainingcenter/{Training_centers}', [TrainingCenterController::class, 'destroy'])->name('trainingcenters.destroy');
 
+Route::get('computer/computador', [ComputerController::class, 'create'])->name('computer.computador');
 Route::get('computer/list', [ComputerController::class, 'index'])->name('computer.index');
+Route::post('computer/model', [ComputerController::class, 'model'])->name('computer.model');
 Route::get('computer/{id}', [ComputerController::class, 'show'])->name('computer.show');
+Route::put('computer/{computer}', [ComputerController::class, 'update'])->name('computer.update');
+Route::get('computer/{computer}/editar', [ComputerController::class, 'edit'])->name('computer.edit');
+Route::delete('computer/{computer}', [ComputerController::class, 'destroy'])->name('computer.destroy');
 
+Route::get('teacher/registro', [TeacherController::class, 'create'])->name('teacher.registro');
 Route::get('teacher/list', [TeacherController::class, 'index'])->name('teacher.index');
+Route::post('teacher/admin', [TeacherController::class, 'dato'])->name('teacher.admin');
 Route::get('teacher/{id}', [TeacherController::class, 'show'])->name('teacher.show');
+Route::put('teacher/{teachers}', [TeacherController::class, 'update'])->name('teacher.update');
+Route::get('teacher/{teachers}/editar', [TeacherController::class, 'edit'])->name('teacher.edit');
+Route::delete('teacher/{teachers}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
 
 Route::get('course/list', [CourseController::class, 'index'])->name('course.index');
 Route::get('course/{id}', [CourseController::class, 'show'])->name('course.show');
