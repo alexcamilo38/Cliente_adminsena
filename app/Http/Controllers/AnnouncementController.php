@@ -32,5 +32,45 @@ class AnnouncementController extends Controller
         return view('announcements.show', compact('announcement'));
     }
 
+    public function create()
+    {
+        $url = env('URL_SERVER_API');
+        $training_centers  = Http::get($url .'/trainingcenter/list')->json();
+        return view('announcements.create',compact('training_centers'));
+    }
+
+    public function dato(Request $request)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::post($url . '/announcements/admin', $request->all());
+
+        return redirect()->route('announcements.index');
+    }
+
+    public function edit($id)
+    {
+        $url = env('URL_SERVER_API');
+        $announcements = $this->fetchDataFromApi($url . '/announcements/' . $id);
+        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/' . $id);
+        return view('announcements.edit', compact('announcements','training_centers'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $url = env('URL_SERVER_API');
+
+        Http::put($url . '/announcements/' . $id, $request->all());
+
+        return redirect()->route('announcements.index');
+    }
+
+      public function destroy($id)
+    {
+        $url = env('URL_SERVER_API');
+        Http::delete($url . '/announcements/' . $id);
+        return redirect()->route('announcements.index');
+    }
+
     
 }

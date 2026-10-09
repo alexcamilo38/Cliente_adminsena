@@ -45,9 +45,9 @@
                             <select name="training_center_id" id="training_center_id" class="form-select">
                                 <option value="">Seleccione un centro de formación</option>
 
-                                @foreach ($training_centers as $training)
-                                    <option value="{{ $training->id }}" {{ old('training_center_id') == $training->id ? 'selected' : '' }}>
-                                        {{ $training->name ?? 'Centro #' . $training->id }}
+                                @foreach ($training_centers ?? [] as $training)
+                                    <option value="{{ $training['id'] ?? $training->id }}" {{ old('training_center_id') == ($training['id'] ?? $training->id) ? 'selected' : '' }}>
+                                        {{ $training['name'] ?? 'Centro #' . $training->id }}
                                     </option>
                                 @endforeach
                             </select>
@@ -61,9 +61,9 @@
                             <select name="cohort_id" id="cohort_id" class="form-select">
                                 <option value="">Seleccione una cohorte...</option>
 
-                                @foreach ($cohorts as $cohort)
-                                    <option value="{{ $cohort->id }}" {{ old('cohort_id') == $cohort->id ? 'selected' : '' }}>
-                                        {{ $cohort->name ?? $cohort->code ?? 'Cohorte #' . $cohort->id }}
+                                @foreach ($cohorts ?? [] as $cohort)
+                                    <option value="{{$cohort['id'] ?? $cohort->id }}" {{ old('cohort_id') == ($cohort['id'] ?? $cohort->id)? 'selected' : '' }}>
+                                        {{ $cohort['name']  ?? $cohort['code'] ?? 'Cohorte #' . $cohort->id }}
                                     </option>
                                 @endforeach
                             </select>
@@ -77,9 +77,9 @@
                             <select name="environment_id" id="environment_id" class="form-select">
                                 <option value="">Seleccione un ambiente...</option>
 
-                                @foreach ($environments as $environment)
-                                    <option value="{{ $environment->id }}" {{ old('environment_id') == $environment->id ? 'selected' : '' }}>
-                                        Ambiente {{ $environment->name ?? $environment->id }}
+                                @foreach ($environments ?? [] as $environment)
+                                    <option value="{{$environment['id'] ?? $environment->id }}" {{ old('environment_id') == ($environment['id'] ?? $environment->id )? 'selected' : '' }}>
+                                        Ambiente {{ $environment['name'] ?? $environment->id }}
                                     </option>
                                 @endforeach
                             </select>

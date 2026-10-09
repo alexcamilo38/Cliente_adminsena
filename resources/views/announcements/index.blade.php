@@ -6,6 +6,9 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="fw-bold text-dark">Lista de Anuncios</h1>
 
+         <a href="{{ route('announcements.create') }}" class="btn btn-success shadow-sm">
+                <i class="bi bi-plus-circle"></i> Nuevo Anuncio
+            </a>
         </div>
 
         <div class="card shadow-lg border-0 rounded-4">
@@ -73,6 +76,20 @@
                                         <a href="{{ route('announcements.show', $announcement['id']) }}" class="btn btn-info btn-sm me-1 text-white">
                                             Mostrar
                                         </a>
+
+                                        <a href="{{ route('announcements.edit', $announcement['id']) }}" class="btn btn-warning btn-sm me-1 text-white">
+                                            Editar
+                                        </a>
+
+                                        <form action="{{ route('announcements.destroy', $announcement['id']) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Está seguro de eliminar este anuncio?')">
+                                            @csrf
+                                            @method('delete')
+
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                Eliminar
+                                            </button>
+
+                                        </form>
 
                                     </td>
 

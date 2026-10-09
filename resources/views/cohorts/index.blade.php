@@ -5,6 +5,9 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="fw-bold text-dark">Lista de Fichas</h1>
+            <a href="{{ route('cohorts.create') }}" class="btn btn-success shadow-sm">
+                <i class="bi bi-plus-circle"></i> Nueva Ficha
+            </a>
         </div>
 
         <div class="card shadow-lg border-0 rounded-4">
@@ -58,6 +61,19 @@
                                     <a href="{{ route('cohorts.show', $cohort['id']) }}" class="btn btn-info btn-sm text-white me-1">
                                         Mostrar
                                     </a>
+                                    <a href="{{ route('cohorts.edit', $cohort['id']) }}" class="btn btn-warning btn-sm me-1">
+                                        Editar
+                                    </a>
+
+                                    <form action="{{ route('cohorts.destroy', $cohort['id']) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar esta ficha?');">
+                                        @csrf
+                                        @method('delete')
+
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            Eliminar
+                                        </button>
+
+                                    </form>
 
 
                                 </td>
