@@ -52,7 +52,7 @@ class EnvironmentController extends Controller
     {
         $url = env('URL_SERVER_API');
         $environments = $this->fetchDataFromApi($url . '/environment/' . $id);
-        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/' . $id);
+        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/list');
         return view('environments.edit', compact('environments','training_centers'));
     }
 

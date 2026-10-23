@@ -53,7 +53,7 @@ class ComputerController extends Controller
     {
         $url = env('URL_SERVER_API');
         $computer = $this->fetchDataFromApi($url . '/computer/' . $id);
-        $environments = $this->fetchDataFromApi($url . '/environments/' . $id);
+        $environments = $this->fetchDataFromApi($url . '/environment/list');
         return view('computer.edit', compact('computer','environments'));
     }
 

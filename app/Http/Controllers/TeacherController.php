@@ -54,8 +54,8 @@ class TeacherController extends Controller
     {
         $url = env('URL_SERVER_API');
         $teachers = $this->fetchDataFromApi($url . '/teacher/' . $id);
-        $areas = $this->fetchDataFromApi($url . '/areas/' . $id);
-        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/' . $id);
+        $areas = $this->fetchDataFromApi($url . '/areas/list');
+        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/list');
         return view('teacher.edit', compact('teachers','areas','training_centers'));
     }
 

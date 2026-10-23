@@ -54,9 +54,9 @@ class CourseController extends Controller
     {
         $url = env('URL_SERVER_API');
         $courses = $this->fetchDataFromApi($url . '/course/' . $id);
-        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/' . $id);
-        $cohorts = $this->fetchDataFromApi($url . '/cohorts/' . $id);
-        $environments = $this->fetchDataFromApi($url . '/environment/' . $id);
+        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/list');
+        $cohorts = $this->fetchDataFromApi($url . '/cohorts/list');
+        $environments = $this->fetchDataFromApi($url . '/environment/list');
         return view('course.edit', compact('courses','training_centers','cohorts','environments'));
     }
 

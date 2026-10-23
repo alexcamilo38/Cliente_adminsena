@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/about', function () { return view('about.about');});
 
 Route::get('areas/create', [AreaController::class, 'create'])->name('areas.create');
 Route::get('areas/list', [AreaController::class, 'index'])->name('areas.index');

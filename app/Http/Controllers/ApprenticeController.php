@@ -53,8 +53,8 @@ class ApprenticeController extends Controller
     {
         $url = env('URL_SERVER_API');
         $apprentices = $this->fetchDataFromApi($url . '/apprentice/' . $id);
-        $courses = $this->fetchDataFromApi($url . '/course/' . $id);
-        $computers = $this->fetchDataFromApi($url . '/computer/' . $id);
+        $courses = $this->fetchDataFromApi($url . '/course/list');
+        $computers = $this->fetchDataFromApi($url . '/computer/list');
         return view('apprentice.edit', compact('apprentices','courses','computers'));
     }
 

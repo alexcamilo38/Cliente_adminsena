@@ -19,6 +19,7 @@ class AnnouncementController extends Controller
     {
         $url = env('URL_SERVER_API');$url = env('URL_SERVER_API');
         $announcements = $this->fetchDataFromApi($url . '/announcements/list');
+        
 
         return view('announcements.index', compact('announcements'));
     }
@@ -52,7 +53,7 @@ class AnnouncementController extends Controller
     {
         $url = env('URL_SERVER_API');
         $announcements = $this->fetchDataFromApi($url . '/announcements/' . $id);
-        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/' . $id);
+        $training_centers = $this->fetchDataFromApi($url . '/trainingcenter/list');
         return view('announcements.edit', compact('announcements','training_centers'));
     }
 

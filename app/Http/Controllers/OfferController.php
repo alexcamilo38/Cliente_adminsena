@@ -51,7 +51,7 @@ class OfferController extends Controller
     {
         $url = env('URL_SERVER_API');
         $offers = $this->fetchDataFromApi($url . '/offer/' . $id);
-        $programs = $this->fetchDataFromApi($url . '/program/' . $id);
+        $programs = $this->fetchDataFromApi($url . '/program/list');
         return view('offers.edit', compact('offers','programs'));
     }
 

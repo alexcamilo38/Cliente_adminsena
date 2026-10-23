@@ -50,7 +50,7 @@ class CohortController extends Controller
     {
         $url = env('URL_SERVER_API');
         $cohorts = $this->fetchDataFromApi($url . '/cohorts/' . $id);
-        $offers = $this->fetchDataFromApi($url . '/offer/' . $id);
+        $offers = $this->fetchDataFromApi($url . '/offer/list');
         return view('cohorts.edit', compact('cohorts','offers'));
     }
 

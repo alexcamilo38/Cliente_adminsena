@@ -51,7 +51,7 @@ class ProgramController extends Controller
     {
         $url = env('URL_SERVER_API');
         $program = $this->fetchDataFromApi($url . '/program/' . $id);
-        $areas = $this->fetchDataFromApi($url . '/areas/' . $id);
+        $areas = $this->fetchDataFromApi($url . '/areas/list');
         return view('programs.edit', compact('program','areas'));
     }
 
