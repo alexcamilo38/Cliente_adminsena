@@ -23,6 +23,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
+                            <th>Imagen</th>
                             <th class="text-center">Acciones</th>
 
                         </tr>
@@ -37,6 +38,9 @@
 
                                 <td class="fw-semibold">
                                     {{ $area['name'] }}
+                                </td>
+                                <td>
+                                    <img src="{{ $area['imagen_url'] }}" alt="{{ $area['name'] }}" width="100">
                                 </td>
 
                                 <td class="text-center">

@@ -24,6 +24,20 @@
                                 class="form-control"
                                 placeholder="Ingrese el nombre del área">
                         </div>
+
+                        {{-- Imagen --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                Imagen del área
+                            </label>
+
+                            <input
+                                type="file"
+                                name="imagen"
+                                class="form-control"
+                                accept="image/jpeg,image/png,image/webp"
+                                required>
+                        </div>
                           
                         <button type="submit" class="btn btn-success">
                             Enviar Formulario

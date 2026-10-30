@@ -26,6 +26,7 @@
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Ubicación</th>
+                            <th>Imagen</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -43,6 +44,9 @@
                                 </td>
 
                                 <td>{{ $Training_center['location']}}</td>
+                                <td>
+                                    <img src="{{ $Training_center['imagen_url'] }}" alt="{{ $Training_center['name'] }}" width="100">
+                                </td>
 
                                 <td class="text-center">
 

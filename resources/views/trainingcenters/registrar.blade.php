@@ -36,6 +36,20 @@
                                 placeholder="Ingrese la ubicación del centro">
                         </div>
 
+                        {{-- Imagen --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                Imagen del centro
+                            </label>
+
+                            <input
+                                type="file"
+                                name="imagen"
+                                class="form-control"
+                                accept="image/jpeg,image/png,image/webp"
+                                required>
+                        </div>
+
                         <button type="submit" class="btn btn-success">
                             Enviar Formulario
                         </button>
